@@ -1,6 +1,7 @@
 // 예시 문제 기반 퀴즈 데이터
 const quizData = [
   {
+    image: 'images/01.png',
     question: '1. 다음 단어의 뜻을 구별해 주는 요소로 알맞지 않은 것은?',
     choices: [
       '곰, 솜 - 자음',
@@ -12,6 +13,7 @@ const quizData = [
     answer: 5
   },
   {
+    image: 'images/02.png',
     question: '2. 국어의 음운에 대한 설명으로 적절하지 않은 것은?',
     choices: [
       '음운의 종류에는 자음과 모음이 있다.',
@@ -94,7 +96,12 @@ const restartBtn = document.getElementById('restart-btn');
 
 function loadQuiz() {
   const quiz = quizData[currentQuiz];
-  questionEl.textContent = quiz.question;
+  // 이미지가 있으면 question 영역에 이미지와 텍스트를 함께 표시
+  if (quiz.image) {
+    questionEl.innerHTML = `<img src="${quiz.image}" alt="문제 이미지" style="max-width:120px; display:block; margin-bottom:10px;">` + quiz.question;
+  } else {
+    questionEl.textContent = quiz.question;
+  }
   choicesEl.innerHTML = '';
   resultEl.textContent = '';
   quiz.choices.forEach((choice, idx) => {
